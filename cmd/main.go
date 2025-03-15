@@ -55,7 +55,7 @@ func NewLogger(isDebugMode bool) *slog.Logger {
 		opts.Level = slog.LevelDebug
 	}
 
-	l := slog.New(slog.NewTextHandler(os.Stdin, &opts))
+	l := slog.New(slog.NewTextHandler(os.Stdout, &opts))
 	slog.SetDefault(l)
 
 	return l

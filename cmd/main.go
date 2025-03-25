@@ -57,7 +57,7 @@ func diffByRune(ctx context.Context, l *slog.Logger, file1, file2 string) {
 	l.Debug("input", "text1", string(text1), "text2", string(text2))
 
 	edits := diff.Myers(text1, text2)
-	fmt.Print(edits)
+	fmt.Print(edits.ColorString())
 }
 
 func diffByLine(ctx context.Context, l *slog.Logger, file1, file2 string) {
@@ -82,7 +82,7 @@ func diffByLine(ctx context.Context, l *slog.Logger, file1, file2 string) {
 	l.Debug("input", "text1", text1, "text2", text2)
 
 	edits := diff.MyersByline(text1, text2)
-	fmt.Print(edits)
+	fmt.Print(edits.ColorString())
 }
 
 func newLogger(isDebugMode bool) *slog.Logger {

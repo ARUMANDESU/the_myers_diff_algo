@@ -8,24 +8,24 @@ import (
 
 const resultSeparator = "----------------------------------------"
 
-func isDebug() bool {
+func IsDebug() bool {
 	return slog.Default().Handler().Enabled(context.Background(), slog.LevelDebug)
 }
 
 func Debugln() {
-	if isDebug() {
+	if IsDebug() {
 		fmt.Println()
 	}
 }
 
 func Debugf(format string, args ...interface{}) {
-	if isDebug() {
+	if IsDebug() {
 		fmt.Printf(format, args...)
 	}
 }
 
 func ResultSeparator() {
-	if isDebug() {
+	if IsDebug() {
 		fmt.Println(resultSeparator)
 	}
 }

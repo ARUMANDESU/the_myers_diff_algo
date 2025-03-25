@@ -3,6 +3,8 @@ package diff
 import (
 	"fmt"
 	"strings"
+
+	"github.com/ARUMANDESU/the_myers_diff_algo/pkg/colors"
 )
 
 type ChangesLines []EditLine
@@ -12,6 +14,17 @@ func (c ChangesLines) String() string {
 
 	for _, edit := range c {
 		result.WriteString(edit.String())
+		result.WriteString("\n")
+	}
+
+	return result.String()
+}
+
+func (c ChangesLines) ColorString() string {
+	var result strings.Builder
+
+	for _, edit := range c {
+		result.WriteString(edit.ColorString())
 		result.WriteString("\n")
 	}
 
@@ -33,6 +46,19 @@ func (e EditLine) String() string {
 		return fmt.Sprintf("+%s", e.Line)
 	case Delete:
 		return fmt.Sprintf("-%s", e.Line)
+	default:
+		return "?"
+	}
+}
+
+func (e EditLine) ColorString() string {
+	switch e.Type {
+	case Keep:
+		return fmt.Sprintf("   %s", e.Line)
+	case Insert:
+		return fmt.Sprintf("+++%s%s%s", colors.Green, e.Line, colors.Reset)
+	case Delete:
+		return fmt.Sprintf("---%s%s%s", colors.Red, e.Line, colors.Reset)
 	default:
 		return "?"
 	}

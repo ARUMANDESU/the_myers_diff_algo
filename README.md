@@ -50,6 +50,48 @@ The edit script would be:
 - Keep C:   ADC -> (3, 3) -> ADC
 ```
 
+## Examples
+Use `-d` flag to debug the algorithm
+```shell
+go run ./cmd/.  examples/1a examples/1b 
+```
+
+```shell
+go run ./cmd/.  examples/2a examples/2b 
+```
+
+```shell
+go run ./cmd/.  examples/3a examples/3b 
+```
+
+```shell
+go run ./cmd/.  examples/4a examples/4b 
+```
+
+```shell
+go run ./cmd/.  examples/5a examples/5b 
+```
+
+```shell
+go run ./cmd/.  examples/6a examples/6b 
+```
+
+```shell
+go run ./cmd/.  examples/7a examples/7b 
+```
+
+```shell
+go run ./cmd/.  examples/8a examples/8b 
+```
+
+```shell
+go run ./cmd/.  examples/9a examples/9b 
+```
+
+```shell
+go run ./cmd/. -l  examples/10a examples/10b 
+```
+
 
 ## Helpful links
 - [Myers Diff algorithm](https://blog.robertelder.org/diff-algorithm/)

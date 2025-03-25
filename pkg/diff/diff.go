@@ -49,6 +49,7 @@ func Myers(a, b []rune) Changes {
 	logs.Debugln()
 depth:
 	for d := 0; d < m; d++ {
+		// logs.Debugf("Depth: %d\n", d)
 		for k := -d; k <= d; k += 2 {
 			var (
 				x     int
@@ -57,36 +58,43 @@ depth:
 			if k == -d || (k != d && v[k-1].X < v[k+1].X) {
 				x = v[k+1].X
 				prevK = k + 1
-				slog.Debug("vertical move", "x", x, "prevK", prevK)
+				// slog.Debug("vertical move", "x", x, "prevK", prevK)
 			} else {
 				x = v[k-1].X + 1
 				prevK = k - 1
-				slog.Debug("horizontal move", "x", x, "prevK", prevK)
+				// slog.Debug("horizontal move", "x", x, "prevK", prevK)
 			}
 
 			y := x - k
 			start := Point{X: x, Y: y}
-			slog.Debug("start", "start", start)
+			// slog.Debug("start", "start", start)
 
 			currentPath := append([]Point(nil), v[prevK].Path...)
 			currentPath = append(currentPath, start)
-			slog.Debug("current path", "path", currentPath)
+			// slog.Debug("current path", "path", currentPath)
+
+			// Visualize the current state of the algorithm
+			VisualizeProgressiveEditGraph(a, b, v, d, k, start)
 
 			for x < n && y < o && a[x] == b[y] {
 				x++
 				y++
 				currentPath = append(currentPath, Point{X: x, Y: y})
-				slog.Debug("match", "x", x, "y", y, "path", currentPath)
+				// slog.Debug("match", "x", x, "y", y, "path", currentPath)
 			}
 
 			v[k] = FurthestPoint{X: x, Path: currentPath}
-			slog.Debug("furthest point", "k", k, "furthest", v[k])
+			// slog.Debug("furthest point", "k", k, "furthest", v[k])
 
-			printV(v)
+			// printV(v)
 			if x >= n && y >= o {
 				path = currentPath
-				logs.ResultSeparator()
-				slog.Debug("found path", "path", path)
+				// logs.ResultSeparator()
+				// slog.Debug("found path", "path", path)
+
+				// Visualize the final edit graph with the complete path
+				VisualizeEditGraph(a, b, path)
+
 				break depth
 			}
 		}
